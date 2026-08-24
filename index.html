@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobMate</title>
+
     <style>
         * {
             box-sizing: border-box;
@@ -19,60 +20,90 @@
         header {
             background: #4f46e5;
             color: white;
-            padding: 35px 20px;
             text-align: center;
+            padding: 30px 20px;
         }
 
         header h1 {
             margin: 0 0 8px;
-            font-size: 36px;
-        }
-
-        header p {
-            margin: 0;
-            font-size: 17px;
+            font-size: 34px;
         }
 
         main {
             max-width: 900px;
-            margin: 30px auto;
+            margin: 25px auto;
             padding: 0 20px;
         }
 
         .card {
             background: white;
-            padding: 25px;
+            padding: 22px;
             margin-bottom: 20px;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 20px;
-            background: #eef2ff;
-            border-radius: 12px;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 28px;
-            color: #4f46e5;
         }
 
         button {
             background: #4f46e5;
             color: white;
             border: none;
-            padding: 14px 22px;
+            padding: 13px 20px;
             border-radius: 10px;
             font-size: 16px;
+            cursor: pointer;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #applicationForm {
+            display: none;
+        }
+
+        .application {
+            border-left: 5px solid #4f46e5;
+            padding: 15px;
+            margin-top: 15px;
+            background: #f9fafb;
+            border-radius: 8px;
+        }
+
+        .application h3 {
+            margin-top: 0;
+        }
+
+        .status {
+            font-weight: bold;
+            color: #4f46e5;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            text-align: center;
+            background: #eef2ff;
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 26px;
+            color: #4f46e5;
         }
     </style>
 </head>
@@ -87,43 +118,83 @@
 <main>
 
     <div class="card">
-        <h2>Welcome to JobMate 👋</h2>
+        <h2>Welcome 👋</h2>
         <p>Keep track of your job applications in one simple place.</p>
-        <button>Add Application</button>
+        <button onclick="showForm()">➕ Add Application</button>
+    </div>
+
+    <div class="card" id="applicationForm">
+        <h2>Add Job Application</h2>
+
+        <form onsubmit="saveApplication(event)">
+
+            <label>Company Name</label>
+            <input type="text" id="company" placeholder="e.g. ABC Company" required>
+
+            <label>Job Title</label>
+            <input type="text" id="jobTitle" placeholder="e.g. Virtual Assistant" required>
+
+            <label>Job Link</label>
+            <input type="url" id="jobLink" placeholder="https://example.com">
+
+            <label>Date Applied</label>
+            <input type="date" id="dateApplied" required>
+
+            <label>Status</label>
+            <select id="status">
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Offer</option>
+                <option>Rejected</option>
+            </select>
+
+            <label>Notes</label>
+            <textarea id="notes" rows="4" placeholder="Add any notes..."></textarea>
+
+            <button type="submit">💾 Save Application</button>
+        </form>
     </div>
 
     <div class="card">
-        <h2>Dashboard</h2>
+        <h2>📊 Dashboard</h2>
 
         <div class="stats">
             <div class="stat">
-                <strong>0</strong>
+                <strong id="total">0</strong>
                 Applications
             </div>
 
             <div class="stat">
-                <strong>0</strong>
+                <strong id="interviews">0</strong>
                 Interviews
             </div>
 
             <div class="stat">
-                <strong>0</strong>
+                <strong id="offers">0</strong>
                 Offers
             </div>
 
             <div class="stat">
-                <strong>0</strong>
+                <strong id="rejected">0</strong>
                 Rejected
             </div>
         </div>
     </div>
 
     <div class="card">
-        <h2>My Applications</h2>
-        <p>No applications added yet.</p>
+        <h2>📋 My Applications</h2>
+        <div id="applications">
+            <p>No applications added yet.</p>
+        </div>
     </div>
 
 </main>
 
-</body>
-</html>
+<script>
+
+    let applications = JSON.parse(localStorage.getItem("jobmateApplications")) || [];
+
+    function showForm() {
+        document.getElementById("applicationForm").style.display = "block";
+        window.scrollTo({
+            top: document.getElementById("applicationForm").offsetTop
