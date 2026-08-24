@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,11 +86,19 @@ input, select, textarea {
     color: #4f46e5;
 }
 
+.search-box {
+    margin-bottom: 15px;
+}
+
 .application {
     background: #f5f7fb;
     padding: 15px;
     margin-top: 12px;
     border-radius: 10px;
+}
+
+.no-results {
+    color: #6b7280;
 }
 </style>
 </head>
@@ -179,6 +188,22 @@ Rejected
 
 <h2>📋 My Applications</h2>
 
+<input
+    class="search-box"
+    id="search"
+    type="text"
+    placeholder="🔍 Search company or job title..."
+    oninput="displayJobs()"
+>
+
+<select id="filter" onchange="displayJobs()">
+    <option value="All">All Applications</option>
+    <option value="Applied">Applied</option>
+    <option value="Interview">Interview</option>
+    <option value="Offer">Offer</option>
+    <option value="Rejected">Rejected</option>
+</select>
+
 <div id="jobs">
 <p>No applications added yet.</p>
 </div>
@@ -240,16 +265,37 @@ function displayJobs() {
 
     const jobs = document.getElementById("jobs");
 
-    if (applications.length === 0) {
+    const searchText =
+        document.getElementById("search").value.toLowerCase();
 
-        jobs.innerHTML = "<p>No applications added yet.</p>";
+    const filter =
+        document.getElementById("filter").value;
+
+    const filteredJobs = applications.filter(function(job) {
+
+        const matchesSearch =
+            job.company.toLowerCase().includes(searchText) ||
+            job.title.toLowerCase().includes(searchText);
+
+        const matchesFilter =
+            filter === "All" || job.status === filter;
+
+        return matchesSearch && matchesFilter;
+    });
+
+    if (filteredJobs.length === 0) {
+
+        jobs.innerHTML =
+            "<p class='no-results'>No matching applications found.</p>";
 
         return;
     }
 
     jobs.innerHTML = "";
 
-    applications.forEach(function(job, index) {
+    filteredJobs.forEach(function(job) {
+
+        const originalIndex = applications.indexOf(job);
 
         const div = document.createElement("div");
 
@@ -264,7 +310,9 @@ function displayJobs() {
             (job.link
                 ? "<p><a href='" + job.link + "' target='_blank'>🔗 View Job</a></p>"
                 : "") +
-            "<button class='delete-btn' onclick='deleteJob(" + index + ")'>🗑️ Delete</button>";
+            "<button class='delete-btn' onclick='deleteJob(" +
+            originalIndex +
+            ")'>🗑️ Delete</button>";
 
         jobs.appendChild(div);
     });
@@ -297,4 +345,4 @@ updateDashboard();
 </script>
 
 </body>
-</html> 
+    </html>
