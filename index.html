@@ -25,7 +25,7 @@ header h1 {
 }
 
 main {
-    max-width: 800px;
+    max-width: 850px;
     margin: 25px auto;
     padding: 0 20px;
 }
@@ -64,6 +64,25 @@ input, select, textarea {
 
 #form {
     display: none;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.stat {
+    text-align: center;
+    background: #eef2ff;
+    padding: 18px;
+    border-radius: 12px;
+}
+
+.stat strong {
+    display: block;
+    font-size: 28px;
+    color: #4f46e5;
 }
 
 .application {
@@ -128,10 +147,42 @@ input, select, textarea {
 </div>
 
 <div class="card">
+
+<h2>📊 Dashboard</h2>
+
+<div class="stats">
+
+<div class="stat">
+<strong id="total">0</strong>
+Applications
+</div>
+
+<div class="stat">
+<strong id="interviews">0</strong>
+Interviews
+</div>
+
+<div class="stat">
+<strong id="offers">0</strong>
+Offers
+</div>
+
+<div class="stat">
+<strong id="rejected">0</strong>
+Rejected
+</div>
+
+</div>
+</div>
+
+<div class="card">
+
 <h2>📋 My Applications</h2>
+
 <div id="jobs">
 <p>No applications added yet.</p>
 </div>
+
 </div>
 
 </main>
@@ -182,6 +233,7 @@ function saveAndDisplay() {
     );
 
     displayJobs();
+    updateDashboard();
 }
 
 function displayJobs() {
@@ -218,9 +270,31 @@ function displayJobs() {
     });
 }
 
+function updateDashboard() {
+
+    document.getElementById("total").textContent =
+        applications.length;
+
+    document.getElementById("interviews").textContent =
+        applications.filter(function(job) {
+            return job.status === "Interview";
+        }).length;
+
+    document.getElementById("offers").textContent =
+        applications.filter(function(job) {
+            return job.status === "Offer";
+        }).length;
+
+    document.getElementById("rejected").textContent =
+        applications.filter(function(job) {
+            return job.status === "Rejected";
+        }).length;
+}
+
 displayJobs();
+updateDashboard();
 
 </script>
 
 </body>
-</html>
+</html> 
