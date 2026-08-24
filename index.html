@@ -1,1 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobMate</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+
+        header {
+            background: #4f46e5;
+            color: white;
+            padding: 35px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 36px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: #eef2ff;
+            border-radius: 12px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 28px;
+            color: #4f46e5;
+        }
+
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 14px 22px;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>💼 JobMate</h1>
+    <p>Your job search, organised.</p>
+</header>
+
+<main>
+
+    <div class="card">
+        <h2>Welcome to JobMate 👋</h2>
+        <p>Keep track of your job applications in one simple place.</p>
+        <button>Add Application</button>
+    </div>
+
+    <div class="card">
+        <h2>Dashboard</h2>
+
+        <div class="stats">
+            <div class="stat">
+                <strong>0</strong>
+                Applications
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Interviews
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Offers
+            </div>
+
+            <div class="stat">
+                <strong>0</strong>
+                Rejected
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>My Applications</h2>
+        <p>No applications added yet.</p>
+    </div>
+
+</main>
+
+</body>
+</html>
