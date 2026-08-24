@@ -1,6 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JobMate</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+}
+
+header {
+    background: #4f46e5;
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+main {
+    max-width: 800px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+button {
+    background: #4f46e5;
+    color: white;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 9px;
+    font-size: 16px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+#form {
+    display: none;
+}
+
+.application {
+    background: #f5f7fb;
+    padding: 15px;
+    margin-top: 12px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>💼 JobMate</h1>
+<p>Your job search, organised.</p>
+</header>
+
+<main>
+
+<div class="card">
+<h2>Welcome 👋</h2>
+<p>Keep track of your job applications in one simple place.</p>
+
+<button onclick="document.getElementById('form').style.display='block'">
+➕ Add Application
+</button>
+</div>
+
+<div class="card" id="form">
+
+<h2>Add Application</h2>
+
+<form onsubmit="saveJob(event)">
+
+<label>Company</label>
+<input id="company" required>
+
+<label>Job Title</label>
+<input id="title" required>
+
+<label>Job Link</label>
+<input id="link" type="url">
+
+<label>Date Applied</label>
+<input id="date" type="date" required>
+
+<label>Status</label>
+<select id="status">
+<option>Applied</option>
+<option>Interview</option>
+<option>Offer</option>
+<option>Rejected</option>
+</select>
+
+<label>Notes</label>
+<textarea id="notes"></textarea>
+
+<button type="submit">💾 Save Application</button>
+
+</form>
+</div>
+
+<div class="card">
+<h2>📋 My Applications</h2>
+<div id="jobs">
+<p>No applications added yet.</p>
+</div>
+</div>
+
+</main>
+
+<script>
+function saveJob(event) {
+
+event.preventDefault();
+
+const company = document.getElementById("company").value;
+const title = document.getElementById("title").value;
+const link = document.getElementById("link").value;
+const date = document.getElementById("date").value;
+const status = document.getElementById("status").value;
+const notes = document.getElementById("notes").value;
+
+const job = document.createElement("div");
+
+job.className = "application";
+
+job.innerHTML =
+"<h3>" + title + "</h3>" +
+"<p><strong>Company:</strong> " + company + "</p>" +
+"<p><strong>Date:</strong> " + date + "</p>" +
+"<p><strong>Status:</strong> " + status + "</p>" +
+"<p>" + notes + "</p>" +
+(link ? "<a href='" + link + "' target='_blank'>🔗 View Job</a>" : "");
+
+document.getElementById("jobs").appendChild(job);
+
+document.getElementById("form").style.display = "none";
+
+event.target.reset();
+}
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobMate</title>
