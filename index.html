@@ -3,9 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JobMate</title>
+<title>JobMate — Job Application Tracker</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -13,429 +17,907 @@ body {
     color: #1f2937;
 }
 
-header {
-    background: #4f46e5;
+/* SIDEBAR */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 230px;
+    height: 100vh;
+    background: #111827;
     color: white;
+    padding: 25px 15px;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
     text-align: center;
-    padding: 30px 20px;
+    margin-bottom: 35px;
 }
 
-header h1 {
-    margin: 0;
+.logo span {
+    color: #818cf8;
 }
 
-main {
-    max-width: 850px;
-    margin: 25px auto;
-    padding: 0 20px;
+.nav-btn {
+    width: 100%;
+    background: transparent;
+    color: #d1d5db;
+    border: none;
+    padding: 13px;
+    margin: 5px 0;
+    text-align: left;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
 }
 
-.card {
-    background: white;
-    padding: 22px;
-    margin-bottom: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-}
-
-button {
+.nav-btn:hover,
+.nav-btn.active {
     background: #4f46e5;
     color: white;
-    border: none;
-    padding: 12px 18px;
-    border-radius: 9px;
-    font-size: 15px;
-    cursor: pointer;
-    margin-right: 6px;
+}
+
+/* MAIN */
+.main {
+    margin-left: 230px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: #6b7280;
     margin-top: 6px;
 }
 
-.delete-btn {
-    background: #dc2626;
+/* BUTTONS */
+button {
+    cursor: pointer;
+    border: none;
 }
 
-.edit-btn {
-    background: #f59e0b;
+.primary-btn {
+    background: #4f46e5;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
 }
 
-.favorite-btn {
-    background: #e5e7eb;
-    color: #1f2937;
+.primary-btn:hover {
+    background: #4338ca;
 }
 
-input, select, textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-sizing: border-box;
-}
-
-#form {
-    display: none;
-}
-
+/* STATS */
 .stats {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 25px;
 }
 
-.stat {
-    text-align: center;
-    background: #eef2ff;
-    padding: 18px;
-    border-radius: 12px;
+.stat-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
 }
 
-.stat strong {
-    display: block;
-    font-size: 28px;
+.stat-card p {
+    margin: 0;
+    color: #6b7280;
+}
+
+.stat-card h2 {
+    margin: 10px 0 0;
+    font-size: 30px;
     color: #4f46e5;
 }
 
-.application {
-    background: #f5f7fb;
-    padding: 15px;
-    margin-top: 12px;
+/* CONTENT */
+.card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+/* SEARCH */
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-area input,
+.search-area select {
+    padding: 13px;
+    border: 1px solid #d1d5db;
     border-radius: 10px;
+    outline: none;
 }
 
-.search-box {
-    margin-bottom: 8px;
+.search-area input {
+    flex: 1;
 }
 
-.no-results {
+/* APPLICATION */
+.application {
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 14px;
+}
+
+.application-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.application h3 {
+    margin: 0 0 5px;
+}
+
+.company {
     color: #6b7280;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.applied {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.interview {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.offer {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.rejected {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.favorite {
+    color: #f59e0b;
+    font-size: 22px;
+}
+
+.application-details {
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-right: 5px;
+}
+
+.edit {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.delete {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.star {
+    background: #f3f4f6;
+}
+
+/* FORM */
+#formSection {
+    display: none;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 9px;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.form-actions {
+    margin-top: 18px;
+}
+
+/* EMPTY */
+.empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6b7280;
+}
+
+.empty-icon {
+    font-size: 45px;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+    .sidebar {
+        width: 70px;
+        padding: 20px 8px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .nav-btn {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .nav-btn::first-letter {
+        font-size: 20px;
+    }
+
+    .main {
+        margin-left: 70px;
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search-area {
+        flex-direction: column;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<h1>💼 JobMate</h1>
-<p>Your job search, organised.</p>
-</header>
+<!-- SIDEBAR -->
+<aside class="sidebar">
+    <div class="logo">Job<span>Mate</span></div>
 
-<main>
+    <button class="nav-btn active" onclick="showDashboard()">
+        🏠 Dashboard
+    </button>
 
-<div class="card">
-<h2>Welcome 👋</h2>
-<p>Keep track of your job applications in one simple place.</p>
+    <button class="nav-btn" onclick="openForm()">
+        ➕ Add Job
+    </button>
 
-<button onclick="openAddForm()">➕ Add Application</button>
-</div>
+    <button class="nav-btn" onclick="showFavorites()">
+        ⭐ Favorites
+    </button>
+</aside>
 
-<div class="card" id="form">
 
-<h2 id="formTitle">Add Application</h2>
+<!-- MAIN -->
+<main class="main">
 
-<form onsubmit="saveJob(event)">
+    <div class="topbar">
+        <div>
+            <h1>Good day 👋</h1>
+            <div class="subtitle">
+                Keep track of your job search in one place.
+            </div>
+        </div>
 
-<label>Company</label>
-<input id="company" required>
+        <button class="primary-btn" onclick="openForm()">
+            + Add Application
+        </button>
+    </div>
 
-<label>Job Title</label>
-<input id="title" required>
 
-<label>Job Link</label>
-<input id="link" type="url">
+    <!-- STATS -->
+    <section class="stats">
 
-<label>Date Applied</label>
-<input id="date" type="date" required>
+        <div class="stat-card">
+            <p>Total Applications</p>
+            <h2 id="totalCount">0</h2>
+        </div>
 
-<label>Status</label>
-<select id="status">
-<option>Applied</option>
-<option>Interview</option>
-<option>Offer</option>
-<option>Rejected</option>
-</select>
+        <div class="stat-card">
+            <p>Interviews</p>
+            <h2 id="interviewCount">0</h2>
+        </div>
 
-<label>Notes</label>
-<textarea id="notes"></textarea>
+        <div class="stat-card">
+            <p>Offers</p>
+            <h2 id="offerCount">0</h2>
+        </div>
 
-<button type="submit" id="saveButton">💾 Save Application</button>
-<button type="button" onclick="closeForm()">Cancel</button>
+        <div class="stat-card">
+            <p>Favorites</p>
+            <h2 id="favoriteCount">0</h2>
+        </div>
 
-</form>
-</div>
+    </section>
 
-<div class="card">
 
-<h2>📊 Dashboard</h2>
+    <!-- ADD FORM -->
+    <section class="card" id="formSection">
 
-<div class="stats">
+        <h2 id="formTitle">Add Job Application</h2>
 
-<div class="stat">
-<strong id="total">0</strong>
-Applications
-</div>
+        <div class="form-grid">
 
-<div class="stat">
-<strong id="interviews">0</strong>
-Interviews
-</div>
+            <div class="form-group">
+                <label>Job Title</label>
+                <input id="jobTitle" placeholder="e.g. Virtual Assistant">
+            </div>
 
-<div class="stat">
-<strong id="offers">0</strong>
-Offers
-</div>
+            <div class="form-group">
+                <label>Company</label>
+                <input id="company" placeholder="e.g. ABC Company">
+            </div>
 
-<div class="stat">
-<strong id="rejected">0</strong>
-Rejected
-</div>
+            <div class="form-group">
+                <label>Status</label>
+                <select id="status">
+                    <option value="Applied">Applied</option>
+                    <option value="Interview">Interview</option>
+                    <option value="Offer">Offer</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+            </div>
 
-</div>
-</div>
+            <div class="form-group">
+                <label>Application Date</label>
+                <input type="date" id="applicationDate">
+            </div>
 
-<div class="card">
+            <div class="form-group">
+                <label>Interview Date</label>
+                <input type="date" id="interviewDate">
+            </div>
 
-<h2>📋 My Applications</h2>
+            <div class="form-group">
+                <label>Job Link</label>
+                <input id="jobLink" placeholder="https://...">
+            </div>
 
-<input
-    class="search-box"
-    id="search"
-    type="text"
-    placeholder="🔍 Search company or job title..."
-    oninput="displayJobs()"
->
+            <div class="form-group full">
+                <label>Notes</label>
+                <textarea id="notes"
+                    placeholder="Add notes about this application..."></textarea>
+            </div>
 
-<select id="filter" onchange="displayJobs()">
-<option value="All">All Applications</option>
-<option value="Applied">Applied</option>
-<option value="Interview">Interview</option>
-<option value="Offer">Offer</option>
-<option value="Rejected">Rejected</option>
-<option value="Favorites">⭐ Favorites</option>
-</select>
+        </div>
 
-<div id="jobs">
-<p>No applications added yet.</p>
-</div>
+        <div class="form-actions">
 
-</div>
+            <button class="primary-btn" onclick="saveApplication()">
+                Save Application
+            </button>
+
+            <button class="action-btn" onclick="cancelForm()">
+                Cancel
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPLICATIONS -->
+    <section class="card">
+
+        <h2>My Applications</h2>
+
+        <div class="search-area">
+
+            <input
+                id="search"
+                placeholder="🔎 Search jobs or companies..."
+                oninput="renderApplications()"
+            >
+
+            <select id="filter" onchange="renderApplications()">
+                <option value="All">All Statuses</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview">Interview</option>
+                <option value="Offer">Offer</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+
+        </div>
+
+        <div id="applications"></div>
+
+    </section>
 
 </main>
 
+
 <script>
 
-let applications = JSON.parse(
-    localStorage.getItem("jobmateApplications") || "[]"
-);
+let applications =
+    JSON.parse(localStorage.getItem("jobmateApplications")) || [];
 
-let editingIndex = -1;
+let editingId = null;
+let favoritesOnly = false;
 
-function openAddForm() {
 
-    editingIndex = -1;
+/* OPEN FORM */
+function openForm() {
+
+    document.getElementById("formSection").style.display = "block";
 
     document.getElementById("formTitle").textContent =
-        "Add Application";
+        editingId ? "Edit Job Application" : "Add Job Application";
 
-    document.getElementById("saveButton").textContent =
-        "💾 Save Application";
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 
-    document.getElementById("form").style.display = "block";
 
+/* CANCEL */
+function cancelForm() {
+
+    editingId = null;
+
+    document.getElementById("formSection").style.display = "none";
+
+    clearForm();
+}
+
+
+/* CLEAR FORM */
+function clearForm() {
+
+    document.getElementById("jobTitle").value = "";
     document.getElementById("company").value = "";
-    document.getElementById("title").value = "";
-    document.getElementById("link").value = "";
-    document.getElementById("date").value = "";
     document.getElementById("status").value = "Applied";
+    document.getElementById("applicationDate").value = "";
+    document.getElementById("interviewDate").value = "";
+    document.getElementById("jobLink").value = "";
     document.getElementById("notes").value = "";
-
-    window.scrollTo({
-        top: document.getElementById("form").offsetTop,
-        behavior: "smooth"
-    });
 }
 
-function editJob(index) {
 
-    const job = applications[index];
+/* SAVE */
+function saveApplication() {
 
-    editingIndex = index;
+    const jobTitle =
+        document.getElementById("jobTitle").value.trim();
 
-    document.getElementById("formTitle").textContent =
-        "✏️ Edit Application";
+    const company =
+        document.getElementById("company").value.trim();
 
-    document.getElementById("saveButton").textContent =
-        "💾 Update Application";
+    if (!jobTitle || !company) {
+        alert("Please enter the job title and company.");
+        return;
+    }
 
-    document.getElementById("company").value = job.company;
-    document.getElementById("title").value = job.title;
-    document.getElementById("link").value = job.link;
-    document.getElementById("date").value = job.date;
-    document.getElementById("status").value = job.status;
-    document.getElementById("notes").value = job.notes;
+    const application = {
 
-    document.getElementById("form").style.display = "block";
+        id: editingId || Date.now(),
 
-    window.scrollTo({
-        top: document.getElementById("form").offsetTop,
-        behavior: "smooth"
-    });
-}
+        jobTitle: jobTitle,
 
-function saveJob(event) {
+        company: company,
 
-    event.preventDefault();
+        status:
+            document.getElementById("status").value,
 
-    const job = {
-        company: document.getElementById("company").value,
-        title: document.getElementById("title").value,
-        link: document.getElementById("link").value,
-        date: document.getElementById("date").value,
-        status: document.getElementById("status").value,
-        notes: document.getElementById("notes").value,
+        applicationDate:
+            document.getElementById("applicationDate").value,
+
+        interviewDate:
+            document.getElementById("interviewDate").value,
+
+        jobLink:
+            document.getElementById("jobLink").value,
+
+        notes:
+            document.getElementById("notes").value,
 
         favorite:
-            editingIndex !== -1
-                ? applications[editingIndex].favorite
+            editingId
+                ? applications.find(a => a.id === editingId)?.favorite || false
                 : false
     };
 
-    if (editingIndex === -1) {
-        applications.push(job);
+
+    if (editingId) {
+
+        applications =
+            applications.map(a =>
+                a.id === editingId
+                    ? application
+                    : a
+            );
+
     } else {
-        applications[editingIndex] = job;
-        editingIndex = -1;
+
+        applications.unshift(application);
     }
 
-    saveAndDisplay();
-    closeForm();
-}
-
-function closeForm() {
-    document.getElementById("form").style.display = "none";
-}
-
-function toggleFavorite(index) {
-
-    applications[index].favorite =
-        !applications[index].favorite;
-
-    saveAndDisplay();
-}
-
-function deleteJob(index) {
-
-    if (confirm("Delete this application?")) {
-
-        applications.splice(index, 1);
-
-        saveAndDisplay();
-    }
-}
-
-function saveAndDisplay() {
 
     localStorage.setItem(
         "jobmateApplications",
         JSON.stringify(applications)
     );
 
-    displayJobs();
-    updateDashboard();
+
+    editingId = null;
+
+    clearForm();
+
+    document.getElementById("formSection").style.display = "none";
+
+    renderApplications();
+    updateStats();
 }
 
-function displayJobs() {
 
-    const jobs = document.getElementById("jobs");
+/* EDIT */
+function editApplication(id) {
 
-    const searchText =
-        document.getElementById("search").value.toLowerCase();
+    const app =
+        applications.find(a => a.id === id);
+
+    if (!app) return;
+
+    editingId = id;
+
+    document.getElementById("jobTitle").value =
+        app.jobTitle;
+
+    document.getElementById("company").value =
+        app.company;
+
+    document.getElementById("status").value =
+        app.status;
+
+    document.getElementById("applicationDate").value =
+        app.applicationDate || "";
+
+    document.getElementById("interviewDate").value =
+        app.interviewDate || "";
+
+    document.getElementById("jobLink").value =
+        app.jobLink || "";
+
+    document.getElementById("notes").value =
+        app.notes || "";
+
+    openForm();
+}
+
+
+/* DELETE */
+function deleteApplication(id) {
+
+    if (!confirm("Delete this application?")) return;
+
+    applications =
+        applications.filter(a => a.id !== id);
+
+    localStorage.setItem(
+        "jobmateApplications",
+        JSON.stringify(applications)
+    );
+
+    renderApplications();
+    updateStats();
+}
+
+
+/* FAVORITE */
+function toggleFavorite(id) {
+
+    applications =
+        applications.map(a => {
+
+            if (a.id === id) {
+                a.favorite = !a.favorite;
+            }
+
+            return a;
+        });
+
+    localStorage.setItem(
+        "jobmateApplications",
+        JSON.stringify(applications)
+    );
+
+    renderApplications();
+    updateStats();
+}
+
+
+/* STATUS CLASS */
+function statusClass(status) {
+
+    return status.toLowerCase();
+}
+
+
+/* RENDER */
+function renderApplications() {
+
+    const container =
+        document.getElementById("applications");
+
+    const search =
+        document.getElementById("search").value
+        .toLowerCase();
 
     const filter =
         document.getElementById("filter").value;
 
-    const filteredJobs = applications.filter(function(job) {
 
-        const matchesSearch =
-            job.company.toLowerCase().includes(searchText) ||
-            job.title.toLowerCase().includes(searchText);
+    let filtered =
+        applications.filter(app => {
 
-        const matchesFilter =
-            filter === "All" ||
-            job.status === filter ||
-            (filter === "Favorites" && job.favorite);
+            const matchesSearch =
+                app.jobTitle.toLowerCase().includes(search) ||
+                app.company.toLowerCase().includes(search);
 
-        return matchesSearch && matchesFilter;
-    });
+            const matchesFilter =
+                filter === "All" ||
+                app.status === filter;
 
-    if (filteredJobs.length === 0) {
+            const matchesFavorite =
+                !favoritesOnly ||
+                app.favorite;
 
-        jobs.innerHTML =
-            "<p class='no-results'>No matching applications found.</p>";
+            return matchesSearch &&
+                   matchesFilter &&
+                   matchesFavorite;
+        });
+
+
+    if (filtered.length === 0) {
+
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon">📂</div>
+                <h3>No applications found</h3>
+                <p>Add your first job application to get started.</p>
+            </div>
+        `;
 
         return;
     }
 
-    jobs.innerHTML = "";
 
-    filteredJobs.forEach(function(job) {
+    container.innerHTML =
+        filtered.map(app => `
 
-        const originalIndex = applications.indexOf(job);
+            <div class="application">
 
-        const div = document.createElement("div");
+                <div class="application-header">
 
-        div.className = "application";
+                    <div>
+                        <h3>${escapeHTML(app.jobTitle)}</h3>
 
-        const favoriteText =
-            job.favorite ? "⭐ Favorited" : "☆ Favorite";
+                        <div class="company">
+                            ${escapeHTML(app.company)}
+                        </div>
+                    </div>
 
-        div.innerHTML =
-            "<h3>" + job.title + "</h3>" +
-            "<p><strong>Company:</strong> " + job.company + "</p>" +
-            "<p><strong>Date:</strong> " + job.date + "</p>" +
-            "<p><strong>Status:</strong> " + job.status + "</p>" +
-            "<p>" + job.notes + "</p>" +
-            (job.link
-                ? "<p><a href='" + job.link + "' target='_blank'>🔗 View Job</a></p>"
-                : "") +
-            "<button class='favorite-btn' onclick='toggleFavorite(" +
-            originalIndex +
-            ")'>" + favoriteText + "</button>" +
-            "<button class='edit-btn' onclick='editJob(" +
-            originalIndex +
-            ")'>✏️ Edit</button>" +
-            "<button class='delete-btn' onclick='deleteJob(" +
-            originalIndex +
-            ")'>🗑️ Delete</button>";
+                    <span class="status ${statusClass(app.status)}">
+                        ${app.status}
+                    </span>
 
-        jobs.appendChild(div);
-    });
+                </div>
+
+
+                <div class="application-details">
+
+                    📅 Applied:
+                    ${app.applicationDate || "Not specified"}
+
+                    ${app.interviewDate
+                        ? `<br>🎤 Interview:
+                           ${app.interviewDate}`
+                        : ""}
+
+                    ${app.notes
+                        ? `<br>📝 ${escapeHTML(app.notes)}`
+                        : ""}
+
+                </div>
+
+
+                <button
+                    class="action-btn star"
+                    onclick="toggleFavorite(${app.id})">
+
+                    ${app.favorite ? "⭐" : "☆"}
+
+                </button>
+
+
+                <button
+                    class="action-btn edit"
+                    onclick="editApplication(${app.id})">
+
+                    ✏️ Edit
+
+                </button>
+
+
+                <button
+                    class="action-btn delete"
+                    onclick="deleteApplication(${app.id})">
+
+                    🗑️ Delete
+
+                </button>
+
+
+                ${app.jobLink
+                    ? `<a
+                        href="${escapeAttribute(app.jobLink)}"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
+                        <button class="action-btn">
+                            🔗 Job Link
+                        </button>
+
+                       </a>`
+                    : ""}
+
+            </div>
+
+        `).join("");
 }
 
-function updateDashboard() {
 
-    document.getElementById("total").textContent =
+/* STATS */
+function updateStats() {
+
+    document.getElementById("totalCount").textContent =
         applications.length;
 
-    document.getElementById("interviews").textContent =
-        applications.filter(function(job) {
-            return job.status === "Interview";
-        }).length;
+    document.getElementById("interviewCount").textContent =
+        applications.filter(a =>
+            a.status === "Interview"
+        ).length;
 
-    document.getElementById("offers").textContent =
-        applications.filter(function(job) {
-            return job.status === "Offer";
-        }).length;
+    document.getElementById("offerCount").textContent =
+        applications.filter(a =>
+            a.status === "Offer"
+        ).length;
 
-    document.getElementById("rejected").textContent =
-        applications.filter(function(job) {
-            return job.status === "Rejected";
-        }).length;
+    document.getElementById("favoriteCount").textContent =
+        applications.filter(a =>
+            a.favorite
+        ).length;
 }
 
-displayJobs();
-updateDashboard();
+
+/* DASHBOARD */
+function showDashboard() {
+
+    favoritesOnly = false;
+
+    document.getElementById("filter").value = "All";
+
+    renderApplications();
+
+    updateStats();
+}
+
+
+/* FAVORITES */
+function showFavorites() {
+
+    favoritesOnly = true;
+
+    renderApplications();
+
+    updateStats();
+}
+
+
+/* SECURITY */
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value) {
+
+    return String(value)
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+}
+
+
+/* START */
+renderApplications();
+updateStats();
 
 </script>
 
 </body>
-</html>
+    </html>
