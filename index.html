@@ -43,15 +43,19 @@ button {
     background: #4f46e5;
     color: white;
     border: none;
-    padding: 13px 20px;
+    padding: 12px 18px;
     border-radius: 9px;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
+    margin-right: 6px;
 }
 
 .delete-btn {
     background: #dc2626;
-    margin-top: 10px;
+}
+
+.edit-btn {
+    background: #f59e0b;
 }
 
 input, select, textarea {
@@ -86,15 +90,15 @@ input, select, textarea {
     color: #4f46e5;
 }
 
-.search-box {
-    margin-bottom: 15px;
-}
-
 .application {
     background: #f5f7fb;
     padding: 15px;
     margin-top: 12px;
     border-radius: 10px;
+}
+
+.search-box {
+    margin-bottom: 8px;
 }
 
 .no-results {
@@ -116,14 +120,12 @@ input, select, textarea {
 <h2>Welcome 👋</h2>
 <p>Keep track of your job applications in one simple place.</p>
 
-<button onclick="document.getElementById('form').style.display='block'">
-➕ Add Application
-</button>
+<button onclick="openAddForm()">➕ Add Application</button>
 </div>
 
 <div class="card" id="form">
 
-<h2>Add Application</h2>
+<h2 id="formTitle">Add Application</h2>
 
 <form onsubmit="saveJob(event)">
 
@@ -150,7 +152,9 @@ input, select, textarea {
 <label>Notes</label>
 <textarea id="notes"></textarea>
 
-<button type="submit">💾 Save Application</button>
+<button type="submit" id="saveButton">💾 Save Application</button>
+
+<button type="button" onclick="closeForm()">Cancel</button>
 
 </form>
 </div>
@@ -197,11 +201,11 @@ Rejected
 >
 
 <select id="filter" onchange="displayJobs()">
-    <option value="All">All Applications</option>
-    <option value="Applied">Applied</option>
-    <option value="Interview">Interview</option>
-    <option value="Offer">Offer</option>
-    <option value="Rejected">Rejected</option>
+<option value="All">All Applications</option>
+<option value="Applied">Applied</option>
+<option value="Interview">Interview</option>
+<option value="Offer">Offer</option>
+<option value="Rejected">Rejected</option>
 </select>
 
 <div id="jobs">
@@ -218,6 +222,60 @@ let applications = JSON.parse(
     localStorage.getItem("jobmateApplications") || "[]"
 );
 
+let editingIndex = -1;
+
+function openAddForm() {
+
+    editingIndex = -1;
+
+    document.getElementById("formTitle").textContent =
+        "Add Application";
+
+    document.getElementById("saveButton").textContent =
+        "💾 Save Application";
+
+    document.getElementById("form").style.display = "block";
+
+    document.getElementById("company").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("link").value = "";
+    document.getElementById("date").value = "";
+    document.getElementById("status").value = "Applied";
+    document.getElementById("notes").value = "";
+
+    window.scrollTo({
+        top: document.getElementById("form").offsetTop,
+        behavior: "smooth"
+    });
+}
+
+function editJob(index) {
+
+    const job = applications[index];
+
+    editingIndex = index;
+
+    document.getElementById("formTitle").textContent =
+        "✏️ Edit Application";
+
+    document.getElementById("saveButton").textContent =
+        "💾 Update Application";
+
+    document.getElementById("company").value = job.company;
+    document.getElementById("title").value = job.title;
+    document.getElementById("link").value = job.link;
+    document.getElementById("date").value = job.date;
+    document.getElementById("status").value = job.status;
+    document.getElementById("notes").value = job.notes;
+
+    document.getElementById("form").style.display = "block";
+
+    window.scrollTo({
+        top: document.getElementById("form").offsetTop,
+        behavior: "smooth"
+    });
+}
+
 function saveJob(event) {
 
     event.preventDefault();
@@ -231,13 +289,25 @@ function saveJob(event) {
         notes: document.getElementById("notes").value
     };
 
-    applications.push(job);
+    if (editingIndex === -1) {
+
+        applications.push(job);
+
+    } else {
+
+        applications[editingIndex] = job;
+
+        editingIndex = -1;
+    }
 
     saveAndDisplay();
 
-    document.getElementById("form").style.display = "none";
+    closeForm();
+}
 
-    event.target.reset();
+function closeForm() {
+
+    document.getElementById("form").style.display = "none";
 }
 
 function deleteJob(index) {
@@ -310,6 +380,9 @@ function displayJobs() {
             (job.link
                 ? "<p><a href='" + job.link + "' target='_blank'>🔗 View Job</a></p>"
                 : "") +
+            "<button class='edit-btn' onclick='editJob(" +
+            originalIndex +
+            ")'>✏️ Edit</button>" +
             "<button class='delete-btn' onclick='deleteJob(" +
             originalIndex +
             ")'>🗑️ Delete</button>";
@@ -345,4 +418,4 @@ updateDashboard();
 </script>
 
 </body>
-    </html>
+</html>
