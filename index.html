@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+. <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4f46e5">
+
 <title>JobMate</title>
 
 <style>
@@ -10,18 +12,22 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f6f7fb;
-    color: #1f2937;
+    font-family: Inter, Arial, sans-serif;
+    background: #f5f7fb;
+    color: #172033;
 }
 
 button,
 input,
 select,
 textarea {
-    font: inherit;
+    font-family: inherit;
 }
 
 button {
@@ -30,25 +36,30 @@ button {
 
 .app {
     min-height: 100vh;
-    padding-bottom: 80px;
+    padding-bottom: 85px;
 }
 
+/* HEADER */
+
 .header {
-    background: linear-gradient(135deg, #4f46e5, #6366f1);
+    background: linear-gradient(135deg, #4338ca, #6366f1);
     color: white;
-    padding: 22px 18px 28px;
-    border-radius: 0 0 24px 24px;
+    padding: 22px 18px 30px;
+    border-radius: 0 0 28px 28px;
 }
 
 .header-top {
+    max-width: 1000px;
+    margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
 .logo {
-    font-size: 25px;
+    font-size: 27px;
     font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .logo span {
@@ -56,37 +67,45 @@ button {
 }
 
 .profile-mini {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: white;
     color: #4f46e5;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-weight: 800;
+    border: 3px solid rgba(255,255,255,.35);
 }
 
 .welcome {
-    margin-top: 22px;
+    max-width: 1000px;
+    margin: 25px auto 0;
 }
 
 .welcome h1 {
     margin: 0;
-    font-size: 25px;
+    font-size: 26px;
+    letter-spacing: -.5px;
 }
 
 .welcome p {
-    margin: 7px 0 0;
-    opacity: .85;
+    margin: 8px 0 0;
+    opacity: .9;
+    font-size: 14px;
 }
+
+/* CONTENT */
 
 .content {
     width: 100%;
-    max-width: 900px;
+    max-width: 1000px;
     margin: auto;
     padding: 18px;
 }
+
+/* STATS */
 
 .stats {
     display: grid;
@@ -96,37 +115,44 @@ button {
 
 .stat {
     background: white;
-    border-radius: 16px;
-    padding: 17px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.06);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 5px 20px rgba(31,41,55,.06);
+}
+
+.stat-icon {
+    font-size: 22px;
 }
 
 .stat p {
-    margin: 0;
-    font-size: 13px;
+    margin: 9px 0 0;
     color: #6b7280;
+    font-size: 12px;
 }
 
 .stat strong {
     display: block;
-    margin-top: 7px;
-    font-size: 27px;
+    margin-top: 4px;
+    font-size: 28px;
     color: #4f46e5;
 }
 
+/* CARDS */
+
 .card {
     background: white;
-    border-radius: 18px;
+    border-radius: 20px;
     padding: 18px;
     margin-top: 18px;
-    box-shadow: 0 3px 12px rgba(0,0,0,.05);
+    box-shadow: 0 5px 20px rgba(31,41,55,.06);
 }
 
 .card-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    gap: 10px;
+    margin-bottom: 16px;
 }
 
 .card-title h2 {
@@ -134,53 +160,67 @@ button {
     font-size: 19px;
 }
 
+/* BUTTONS */
+
 .primary {
     background: #4f46e5;
     color: white;
     border: none;
-    padding: 12px 16px;
-    border-radius: 11px;
-    font-weight: bold;
+    padding: 12px 17px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.primary:hover {
+    background: #4338ca;
 }
 
 .secondary {
     background: #eef2ff;
     color: #4f46e5;
     border: none;
-    padding: 11px 15px;
-    border-radius: 10px;
+    padding: 12px 17px;
+    border-radius: 12px;
+    font-weight: 600;
 }
 
-.danger {
-    background: #fee2e2;
-    color: #991b1b;
-    border: none;
-    padding: 11px 15px;
-    border-radius: 10px;
-}
+/* SEARCH */
 
-.search,
-.filter,
-.form-group input,
-.form-group select,
-.form-group textarea,
-.auth-card input {
+.search {
     width: 100%;
-    padding: 13px;
-    border: 1px solid #ddd;
-    border-radius: 11px;
+    padding: 14px;
+    border: 1px solid #e1e5ec;
+    border-radius: 12px;
     outline: none;
-    margin-bottom: 12px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    background: #fafbff;
+}
+
+.search:focus,
+.filter:focus,
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,.1);
 }
 
 .filter {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #e1e5ec;
+    border-radius: 12px;
     background: white;
+    outline: none;
 }
 
+/* APPLICATION */
+
 .application {
-    border: 1px solid #e5e7eb;
-    border-radius: 15px;
-    padding: 15px;
+    border: 1px solid #e8ebf1;
+    border-radius: 16px;
+    padding: 16px;
     margin-top: 12px;
 }
 
@@ -198,14 +238,14 @@ button {
 .company {
     color: #6b7280;
     font-size: 13px;
-    margin-top: 4px;
+    margin-top: 5px;
 }
 
 .status {
-    padding: 5px 9px;
+    padding: 6px 10px;
     border-radius: 20px;
     font-size: 11px;
-    font-weight: bold;
+    font-weight: 700;
     white-space: nowrap;
 }
 
@@ -237,17 +277,18 @@ button {
 }
 
 .actions {
-    margin-top: 12px;
+    margin-top: 13px;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 7px;
 }
 
 .small-btn {
     border: none;
-    padding: 8px 10px;
-    border-radius: 8px;
+    padding: 8px 11px;
+    border-radius: 9px;
     font-size: 12px;
+    font-weight: 600;
 }
 
 .edit {
@@ -264,19 +305,39 @@ button {
     background: #f3f4f6;
 }
 
+.open-job {
+    background: #eef2ff;
+    color: #4f46e5;
+    display: inline-block;
+    text-decoration: none;
+}
+
+/* FORMS */
+
 .form-group {
-    margin-bottom: 14px;
+    margin-bottom: 15px;
 }
 
 .form-group label {
     display: block;
     font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 6px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d9dde6;
+    border-radius: 11px;
+    font-size: 14px;
+    outline: none;
 }
 
 .form-group textarea {
-    min-height: 100px;
+    min-height: 110px;
     resize: vertical;
 }
 
@@ -285,22 +346,24 @@ button {
     gap: 8px;
 }
 
+/* PROFILE */
+
 .profile {
     text-align: center;
 }
 
 .avatar {
-    width: 90px;
-    height: 90px;
+    width: 92px;
+    height: 92px;
     border-radius: 50%;
-    background: #4f46e5;
+    background: linear-gradient(135deg,#4f46e5,#818cf8);
     color: white;
     margin: 5px auto 14px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 34px;
-    font-weight: bold;
+    font-size: 35px;
+    font-weight: 800;
 }
 
 .profile h2 {
@@ -309,35 +372,43 @@ button {
 
 .profile-email {
     color: #6b7280;
-    margin: 5px 0 18px;
+    margin: 6px 0 18px;
+    font-size: 14px;
 }
 
 .bio {
     background: #f6f7fb;
     padding: 15px;
-    border-radius: 12px;
+    border-radius: 13px;
     text-align: left;
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 22px;
+    color: #4b5563;
 }
+
+/* EMPTY */
 
 .empty {
     text-align: center;
-    padding: 30px 10px;
+    padding: 38px 10px;
     color: #6b7280;
 }
 
 .empty-icon {
-    font-size: 40px;
+    font-size: 42px;
+    margin-bottom: 8px;
 }
+
+/* NAVIGATION */
 
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
-    height: 68px;
-    background: white;
+    height: 72px;
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(10px);
     border-top: 1px solid #e5e7eb;
     display: flex;
     justify-content: space-around;
@@ -348,9 +419,10 @@ button {
 .nav-item {
     border: none;
     background: transparent;
-    color: #6b7280;
+    color: #7b8190;
     font-size: 11px;
     text-align: center;
+    padding: 6px 12px;
 }
 
 .nav-icon {
@@ -361,83 +433,15 @@ button {
 
 .nav-item.active {
     color: #4f46e5;
-    font-weight: bold;
-}
-
-/* AUTHENTICATION */
-
-.auth-page {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-}
-
-.auth-card {
-    width: 100%;
-    max-width: 420px;
-    background: white;
-    padding: 28px;
-    border-radius: 22px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.08);
-}
-
-.auth-logo {
-    text-align: center;
-    font-size: 32px;
     font-weight: 800;
-    color: #4f46e5;
-    margin-bottom: 8px;
 }
 
-.auth-subtitle {
-    text-align: center;
-    color: #6b7280;
-    margin-bottom: 25px;
-}
-
-.auth-card label {
-    display: block;
-    font-weight: bold;
-    font-size: 13px;
-    margin-bottom: 6px;
-}
-
-.auth-card button {
-    width: 100%;
-    margin-top: 5px;
-}
-
-.auth-switch {
-    text-align: center;
-    margin-top: 18px;
-    color: #6b7280;
-    font-size: 14px;
-}
-
-.auth-switch button {
-    width: auto;
-    background: none;
-    color: #4f46e5;
-    border: none;
-    font-weight: bold;
-}
-
-.auth-message {
-    margin-top: 12px;
-    text-align: center;
-    font-size: 13px;
-    color: #dc2626;
-}
-
-.logout-btn {
-    margin-top: 15px;
-}
+/* DESKTOP */
 
 @media (min-width: 768px) {
+
     .app {
-        padding-bottom: 30px;
+        padding-bottom: 25px;
     }
 
     .stats {
@@ -446,10 +450,10 @@ button {
 
     .bottom-nav {
         position: static;
-        max-width: 900px;
+        max-width: 1000px;
         margin: 20px auto;
         border: 1px solid #e5e7eb;
-        border-radius: 15px;
+        border-radius: 16px;
     }
 }
 </style>
@@ -457,937 +461,450 @@ button {
 
 <body>
 
-<!-- LOGIN -->
-<div id="loginPage" class="auth-page">
+<div class="app">
 
-    <div class="auth-card">
+<header class="header">
 
-        <div class="auth-logo">JobMate</div>
+    <div class="header-top">
 
-        <div class="auth-subtitle">
-            Your personal job application tracker.
+        <div class="logo">
+            Job<span>Mate</span>
         </div>
-
-        <label>Email</label>
-        <input
-            type="email"
-            id="loginEmail"
-            placeholder="you@example.com">
-
-        <label>Password</label>
-        <input
-            type="password"
-            id="loginPassword"
-            placeholder="Enter your password">
 
         <button
-            class="primary"
-            onclick="login()">
-            🔐 Login
-        </button>
-
-        <div
-            id="loginMessage"
-            class="auth-message">
-        </div>
-
-        <div class="auth-switch">
-            Don't have an account?
-            <button onclick="showSignup()">
-                Create Account
-            </button>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- SIGN UP -->
-<div
-    id="signupPage"
-    class="auth-page"
-    style="display:none">
-
-    <div class="auth-card">
-
-        <div class="auth-logo">JobMate</div>
-
-        <div class="auth-subtitle">
-            Create your JobMate account.
-        </div>
-
-        <label>Email</label>
-        <input
-            type="email"
-            id="signupEmail"
-            placeholder="you@example.com">
-
-        <label>Password</label>
-        <input
-            type="password"
-            id="signupPassword"
-            placeholder="At least 6 characters">
-
-        <button
-            class="primary"
-            onclick="createAccount()">
-            👤 Create Account
-        </button>
-
-        <div
-            id="signupMessage"
-            class="auth-message">
-        </div>
-
-        <div class="auth-switch">
-            Already have an account?
-            <button onclick="showLogin()">
-                Login
-            </button>
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- MAIN APP -->
-<div
-    id="mainApp"
-    class="app"
-    style="display:none">
-
-    <header class="header">
-
-        <div class="header-top">
-
-            <div class="logo">
-                Job<span>Mate</span>
-            </div>
-
-            <div
-                class="profile-mini"
-                onclick="showProfile()"
-                id="miniAvatar">
-                J
-            </div>
-
-        </div>
-
-        <div class="welcome">
-
-            <h1 id="welcomeText">
-                Welcome to JobMate 👋
-            </h1>
-
-            <p>
-                Your personal job application tracker.
-            </p>
-
-        </div>
-
-    </header>
-
-
-    <main class="content">
-
-        <!-- DASHBOARD -->
-
-        <section id="dashboard">
-
-            <div class="stats">
-
-                <div class="stat">
-                    <p>Total Applications</p>
-                    <strong id="total">0</strong>
-                </div>
-
-                <div class="stat">
-                    <p>Interviews</p>
-                    <strong id="interviews">0</strong>
-                </div>
-
-                <div class="stat">
-                    <p>Offers</p>
-                    <strong id="offers">0</strong>
-                </div>
-
-                <div class="stat">
-                    <p>Favorites</p>
-                    <strong id="favorites">0</strong>
-                </div>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-title">
-
-                    <h2>My Applications</h2>
-
-                    <button
-                        class="primary"
-                        onclick="openAdd()">
-                        + Add
-                    </button>
-
-                </div>
-
-                <input
-                    class="search"
-                    id="search"
-                    placeholder="🔎 Search jobs or companies..."
-                    oninput="render()">
-
-                <select
-                    class="filter"
-                    id="filter"
-                    onchange="render()">
-
-                    <option value="All">
-                        All statuses
-                    </option>
-
-                    <option value="Applied">
-                        Applied
-                    </option>
-
-                    <option value="Interview">
-                        Interview
-                    </option>
-
-                    <option value="Offer">
-                        Offer
-                    </option>
-
-                    <option value="Rejected">
-                        Rejected
-                    </option>
-
-                </select>
-
-                <div id="applications"></div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ADD / EDIT -->
-
-        <section
-            id="formPage"
-            style="display:none">
-
-            <div class="card">
-
-                <div class="card-title">
-                    <h2 id="formTitle">
-                        Add Application
-                    </h2>
-                </div>
-
-                <div class="form-group">
-
-                    <label>Job Title</label>
-
-                    <input
-                        id="jobTitle"
-                        placeholder="e.g. Virtual Assistant">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Company</label>
-
-                    <input
-                        id="company"
-                        placeholder="e.g. ABC Company">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Status</label>
-
-                    <select id="status">
-
-                        <option>Applied</option>
-                        <option>Interview</option>
-                        <option>Offer</option>
-                        <option>Rejected</option>
-
-                    </select>
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Application Date</label>
-
-                    <input
-                        type="date"
-                        id="applicationDate">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Interview Date</label>
-
-                    <input
-                        type="date"
-                        id="interviewDate">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Job Link</label>
-
-                    <input
-                        id="jobLink"
-                        placeholder="https://...">
-
-                </div>
-
-                <div class="form-group">
-
-                    <label>Notes</label>
-
-                    <textarea
-                        id="notes"
-                        placeholder="Add notes..."></textarea>
-
-                </div>
-
-                <div class="form-buttons">
-
-                    <button
-                        class="primary"
-                        onclick="saveJob()">
-                        Save
-                    </button>
-
-                    <button
-                        class="secondary"
-                        onclick="showDashboard()">
-                        Cancel
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROFILE -->
-
-        <section
-            id="profilePage"
-            style="display:none">
-
-            <div class="card profile">
-
-                <div
-                    class="avatar"
-                    id="avatar">
-                    J
-                </div>
-
-                <h2 id="profileDisplayName">
-                    Your Name
-                </h2>
-
-                <div
-                    class="profile-email"
-                    id="profileDisplayEmail">
-                    your@email.com
-                </div>
-
-                <div
-                    class="bio"
-                    id="profileDisplayBio">
-                    Add your professional bio here.
-                </div>
-
-                <h2 style="text-align:left">
-                    Edit Profile
-                </h2>
-
-                <div
-                    class="form-group"
-                    style="text-align:left">
-
-                    <label>Your Name</label>
-
-                    <input
-                        id="nameInput"
-                        placeholder="Your full name">
-
-                </div>
-
-                <div
-                    class="form-group"
-                    style="text-align:left">
-
-                    <label>Email</label>
-
-                    <input
-                        type="email"
-                        id="emailInput"
-                        placeholder="your@email.com">
-
-                </div>
-
-                <div
-                    class="form-group"
-                    style="text-align:left">
-
-                    <label>Professional Bio</label>
-
-                    <textarea
-                        id="bioInput"
-                        placeholder="Tell us about yourself..."></textarea>
-
-                </div>
-
-                <button
-                    class="primary"
-                    onclick="saveProfile()">
-                    💾 Save Profile
-                </button>
-
-                <button
-                    class="danger logout-btn"
-                    onclick="logout()">
-                    🚪 Logout
-                </button>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- NAVIGATION -->
-
-    <nav class="bottom-nav">
-
-        <button
-            class="nav-item active"
-            id="homeNav"
-            onclick="showDashboard()">
-
-            <span class="nav-icon">🏠</span>
-            Home
-
-        </button>
-
-        <button
-            class="nav-item"
-            onclick="openAdd()">
-
-            <span class="nav-icon">➕</span>
-            Add Job
-
-        </button>
-
-        <button
-            class="nav-item"
-            onclick="showFavorites()">
-
-            <span class="nav-icon">⭐</span>
-            Favorites
-
-        </button>
-
-        <button
-            class="nav-item"
+            class="profile-mini"
+            id="miniAvatar"
             onclick="showProfile()">
-
-            <span class="nav-icon">👤</span>
-            Profile
-
+            J
         </button>
 
-    </nav>
+    </div>
+
+    <div class="welcome">
+
+        <h1 id="welcomeText">
+            Welcome to JobMate 👋
+        </h1>
+
+        <p>
+            Your personal job application tracker.
+        </p>
+
+    </div>
+
+</header>
+
+<main class="content">
+
+<section id="dashboard">
+
+    <div class="stats">
+
+        <div class="stat">
+            <div class="stat-icon">📋</div>
+            <p>Total Applications</p>
+            <strong id="total">0</strong>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🎤</div>
+            <p>Interviews</p>
+            <strong id="interviews">0</strong>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">🎉</div>
+            <p>Offers</p>
+            <strong id="offers">0</strong>
+        </div>
+
+        <div class="stat">
+            <div class="stat-icon">⭐</div>
+            <p>Favorites</p>
+            <strong id="favorites">0</strong>
+        </div>
+
+    </div>
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2 id="applicationsTitle">
+                My Applications
+            </h2>
+
+            <button
+                class="primary"
+                onclick="openAdd()">
+                + Add
+            </button>
+
+        </div>
+
+        <input
+            class="search"
+            id="search"
+            placeholder="🔎 Search jobs or companies..."
+            oninput="render()">
+
+        <select
+            class="filter"
+            id="filter"
+            onchange="render()">
+
+            <option value="All">All statuses</option>
+            <option value="Applied">Applied</option>
+            <option value="Interview">Interview</option>
+            <option value="Offer">Offer</option>
+            <option value="Rejected">Rejected</option>
+
+        </select>
+
+        <div id="applications"></div>
+
+    </div>
+
+</section>
+
+<section id="formPage" style="display:none">
+
+    <div class="card">
+
+        <div class="card-title">
+
+            <h2 id="formTitle">
+                Add Application
+            </h2>
+
+        </div>
+
+        <div class="form-group">
+            <label>Job Title</label>
+            <input id="jobTitle" placeholder="e.g. Virtual Assistant">
+        </div>
+
+        <div class="form-group">
+            <label>Company</label>
+            <input id="company" placeholder="e.g. ABC Company">
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+
+            <select id="status">
+                <option>Applied</option>
+                <option>Interview</option>
+                <option>Offer</option>
+                <option>Rejected</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Application Date</label>
+            <input type="date" id="applicationDate">
+        </div>
+
+        <div class="form-group">
+            <label>Interview Date</label>
+            <input type="date" id="interviewDate">
+        </div>
+
+        <div class="form-group">
+            <label>Job Link</label>
+            <input id="jobLink" placeholder="https://...">
+        </div>
+
+        <div class="form-group">
+            <label>Notes</label>
+            <textarea id="notes" placeholder="Add notes..."></textarea>
+        </div>
+
+        <div class="form-buttons">
+
+            <button class="primary" onclick="saveJob()">
+                Save
+            </button>
+
+            <button class="secondary" onclick="showDashboard()">
+                Cancel
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="profilePage" style="display:none">
+
+    <div class="card profile">
+
+        <div class="avatar" id="avatar">
+            J
+        </div>
+
+        <h2 id="profileDisplayName">
+            Your Name
+        </h2>
+
+        <div class="profile-email" id="profileDisplayEmail">
+            your@email.com
+        </div>
+
+        <div class="bio" id="profileDisplayBio">
+            Add your professional bio here.
+        </div>
+
+        <h2 style="text-align:left">
+            Edit Profile
+        </h2>
+
+        <div class="form-group" style="text-align:left">
+            <label>Your Name</label>
+            <input id="nameInput" placeholder="Your full name">
+        </div>
+
+        <div class="form-group" style="text-align:left">
+            <label>Email</label>
+            <input
+                type="email"
+                id="emailInput"
+                placeholder="your@email.com">
+        </div>
+
+        <div class="form-group" style="text-align:left">
+            <label>Professional Bio</label>
+            <textarea
+                id="bioInput"
+                placeholder="Tell us about yourself..."></textarea>
+        </div>
+
+        <button
+            class="primary"
+            onclick="saveProfile()">
+            💾 Save Profile
+        </button>
+
+    </div>
+
+</section>
+
+</main>
+
+<nav class="bottom-nav">
+
+    <button
+        class="nav-item active"
+        id="homeNav"
+        onclick="showDashboard()">
+        <span class="nav-icon">🏠</span>
+        Home
+    </button>
+
+    <button
+        class="nav-item"
+        id="addNav"
+        onclick="openAdd()">
+        <span class="nav-icon">➕</span>
+        Add Job
+    </button>
+
+    <button
+        class="nav-item"
+        id="favoritesNav"
+        onclick="showFavorites()">
+        <span class="nav-icon">⭐</span>
+        Favorites
+    </button>
+
+    <button
+        class="nav-item"
+        id="profileNav"
+        onclick="showProfile()">
+        <span class="nav-icon">👤</span>
+        Profile
+    </button>
+
+</nav>
 
 </div>
 
+<script>
 
-<script type="module">
+let jobs =
+    JSON.parse(localStorage.getItem("jobmateJobs")) || [];
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-
-const firebaseConfig = {
-    apiKey: "AIzaSyC4ZK-zKWvGojS9aQaP9GTtml89dhfS_e4",
-    authDomain: "jobmate-903e4.firebaseapp.com",
-    projectId: "jobmate-903e4",
-    storageBucket: "jobmate-903e4.firebasestorage.app",
-    messagingSenderId: "190306290177",
-    appId: "1:190306290177:web:8c2ce73d3c108758c58e00",
-    measurementId: "G-LZBRQ91EX9"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-
-/* =========================
-   LOCAL JOB DATA
-========================= */
-
-let jobs = [];
-let profile = {
-    name: "",
-    email: "",
-    bio: ""
-};
+let profile =
+    JSON.parse(localStorage.getItem("jobmateProfile")) || {
+        name: "",
+        email: "",
+        bio: ""
+    };
 
 let editingId = null;
 let favoritesOnly = false;
 
 
-/* =========================
-   AUTHENTICATION
-========================= */
-
-window.showLogin = function() {
-
-    document.getElementById("loginPage")
-        .style.display = "flex";
-
-    document.getElementById("signupPage")
-        .style.display = "none";
-
-    document.getElementById("mainApp")
-        .style.display = "none";
-};
-
-
-window.showSignup = function() {
-
-    document.getElementById("loginPage")
-        .style.display = "none";
-
-    document.getElementById("signupPage")
-        .style.display = "flex";
-
-    document.getElementById("mainApp")
-        .style.display = "none";
-};
-
-
-window.createAccount = async function() {
-
-    const email =
-        document.getElementById("signupEmail")
-            .value.trim();
-
-    const password =
-        document.getElementById("signupPassword")
-            .value;
-
-    const message =
-        document.getElementById("signupMessage");
-
-    message.textContent = "";
-
-    if (!email || !password) {
-
-        message.textContent =
-            "Please enter your email and password.";
-
-        return;
-    }
-
-    if (password.length < 6) {
-
-        message.textContent =
-            "Password must be at least 6 characters.";
-
-        return;
-    }
-
-    try {
-
-        await createUserWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-        message.style.color = "#166534";
-        message.textContent =
-            "Account created successfully! 🎉";
-
-    } catch (error) {
-
-        message.style.color = "#dc2626";
-
-        if (error.code ===
-            "auth/email-already-in-use") {
-
-            message.textContent =
-                "An account with this email already exists.";
-
-        } else {
-
-            message.textContent =
-                "Could not create the account. Please try again.";
-        }
-    }
-};
-
-
-window.login = async function() {
-
-    const email =
-        document.getElementById("loginEmail")
-            .value.trim();
-
-    const password =
-        document.getElementById("loginPassword")
-            .value;
-
-    const message =
-        document.getElementById("loginMessage");
-
-    message.textContent = "";
-
-    if (!email || !password) {
-
-        message.textContent =
-            "Please enter your email and password.";
-
-        return;
-    }
-
-    try {
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-    } catch (error) {
-
-        message.textContent =
-            "Login failed. Check your email and password.";
-    }
-};
-
-
-window.logout = async function() {
-
-    await signOut(auth);
-};
-
-
-onAuthStateChanged(auth, user => {
-
-    if (user) {
-
-        document.getElementById("loginPage")
-            .style.display = "none";
-
-        document.getElementById("signupPage")
-            .style.display = "none";
-
-        document.getElementById("mainApp")
-            .style.display = "block";
-
-        loadUserData(user);
-
-    } else {
-
-        document.getElementById("loginPage")
-            .style.display = "flex";
-
-        document.getElementById("signupPage")
-            .style.display = "none";
-
-        document.getElementById("mainApp")
-            .style.display = "none";
-    }
-
-});
-
-
-/* =========================
-   USER DATA
-========================= */
-
-function loadUserData(user) {
-
-    const storedJobs =
-        localStorage.getItem(
-            "jobmateJobs_" + user.uid
-        );
-
-    const storedProfile =
-        localStorage.getItem(
-            "jobmateProfile_" + user.uid
-        );
-
-    jobs =
-        storedJobs
-        ? JSON.parse(storedJobs)
-        : [];
-
-    profile =
-        storedProfile
-        ? JSON.parse(storedProfile)
-        : {
-            name: "",
-            email: user.email,
-            bio: ""
-        };
-
-    if (!profile.email) {
-        profile.email = user.email;
-    }
-
-    loadProfile();
-    render();
-    updateStats();
-    showDashboard();
-}
-
-
-function saveJobs() {
-
-    const user = auth.currentUser;
-
-    if (!user) return;
-
-    localStorage.setItem(
-        "jobmateJobs_" + user.uid,
-        JSON.stringify(jobs)
-    );
-}
-
-
-function saveProfileData() {
-
-    const user = auth.currentUser;
-
-    if (!user) return;
-
-    localStorage.setItem(
-        "jobmateProfile_" + user.uid,
-        JSON.stringify(profile)
-    );
-}
-
-
-/* =========================
-   NAVIGATION
-========================= */
+/* NAVIGATION */
 
 function hideAll() {
 
-    document.getElementById("dashboard")
-        .style.display = "none";
-
-    document.getElementById("formPage")
-        .style.display = "none";
-
-    document.getElementById("profilePage")
-        .style.display = "none";
+    document.getElementById("dashboard").style.display = "none";
+    document.getElementById("formPage").style.display = "none";
+    document.getElementById("profilePage").style.display = "none";
 }
 
-
-window.showDashboard = function() {
+function showDashboard() {
 
     hideAll();
 
-    document.getElementById("dashboard")
-        .style.display = "block";
+    document.getElementById("dashboard").style.display = "block";
 
     favoritesOnly = false;
 
     setActive("homeNav");
 
+    document.getElementById("applicationsTitle").textContent =
+        "My Applications";
+
     render();
     updateStats();
 
-    window.scrollTo(0, 0);
-};
+    window.scrollTo(0,0);
+}
 
-
-window.openAdd = function() {
+function openAdd() {
 
     hideAll();
 
-    document.getElementById("formPage")
-        .style.display = "block";
+    document.getElementById("formPage").style.display = "block";
 
-    document.getElementById("formTitle")
-        .textContent =
+    document.getElementById("formTitle").textContent =
         editingId
         ? "Edit Application"
         : "Add Application";
 
-    setActive("");
+    setActive("addNav");
 
-    window.scrollTo(0, 0);
-};
+    window.scrollTo(0,0);
+}
 
-
-window.showFavorites = function() {
+function showFavorites() {
 
     hideAll();
 
-    document.getElementById("dashboard")
-        .style.display = "block";
+    document.getElementById("dashboard").style.display = "block";
 
     favoritesOnly = true;
 
-    setActive("");
+    setActive("favoritesNav");
+
+    document.getElementById("applicationsTitle").textContent =
+        "Favorite Jobs ⭐";
 
     render();
 
-    window.scrollTo(0, 0);
-};
+    window.scrollTo(0,0);
+}
 
-
-window.showProfile = function() {
+function showProfile() {
 
     hideAll();
 
-    document.getElementById("profilePage")
-        .style.display = "block";
+    document.getElementById("profilePage").style.display = "block";
 
-    setActive("");
+    setActive("profileNav");
 
     loadProfile();
 
-    window.scrollTo(0, 0);
-};
-
+    window.scrollTo(0,0);
+}
 
 function setActive(id) {
 
-    document.querySelectorAll(".nav-item")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
+    document.querySelectorAll(".nav-item").forEach(btn => {
+        btn.classList.remove("active");
+    });
 
     if (id) {
-
-        document.getElementById(id)
-            .classList.add("active");
+        const button = document.getElementById(id);
+        if (button) {
+            button.classList.add("active");
+        }
     }
 }
 
 
-/* =========================
-   APPLICATIONS
-========================= */
+/* APPLICATIONS */
 
-window.saveJob = function() {
+function saveJob() {
 
     const title =
-        document.getElementById("jobTitle")
-            .value.trim();
+        document.getElementById("jobTitle").value.trim();
 
     const company =
-        document.getElementById("company")
-            .value.trim();
+        document.getElementById("company").value.trim();
 
     if (!title || !company) {
 
-        alert(
-            "Please enter the job title and company."
-        );
+        alert("Please enter the job title and company.");
 
         return;
     }
 
     const oldJob =
-        jobs.find(
-            j => j.id === editingId
-        );
+        jobs.find(j => j.id === editingId);
 
     const job = {
 
         id: editingId || Date.now(),
 
-        title,
+        title: title,
 
-        company,
+        company: company,
 
         status:
-            document.getElementById("status")
-                .value,
+            document.getElementById("status").value,
 
         applicationDate:
-            document.getElementById(
-                "applicationDate"
-            ).value,
+            document.getElementById("applicationDate").value,
 
         interviewDate:
-            document.getElementById(
-                "interviewDate"
-            ).value,
+            document.getElementById("interviewDate").value,
 
         link:
-            document.getElementById("jobLink")
-                .value,
+            document.getElementById("jobLink").value.trim(),
 
         notes:
-            document.getElementById("notes")
-                .value,
+            document.getElementById("notes").value.trim(),
 
         favorite:
-            oldJob
-            ? oldJob.favorite
-            : false
+            oldJob ? oldJob.favorite : false
     };
 
     if (editingId) {
 
-        jobs =
-            jobs.map(
-                j =>
-                    j.id === editingId
-                    ? job
-                    : j
-            );
+        jobs = jobs.map(j =>
+            j.id === editingId ? job : j
+        );
 
     } else {
 
         jobs.unshift(job);
     }
 
-    saveJobs();
+    localStorage.setItem(
+        "jobmateJobs",
+        JSON.stringify(jobs)
+    );
 
     editingId = null;
 
     clearForm();
 
     showDashboard();
-};
-
+}
 
 function clearForm() {
 
@@ -1400,122 +917,100 @@ function clearForm() {
     document.getElementById("notes").value = "";
 }
 
-
-window.editJob = function(id) {
+function editJob(id) {
 
     const job =
-        jobs.find(
-            j => j.id === id
-        );
+        jobs.find(j => j.id === id);
 
     if (!job) return;
 
     editingId = id;
 
-    document.getElementById("jobTitle").value =
-        job.title;
-
-    document.getElementById("company").value =
-        job.company;
-
-    document.getElementById("status").value =
-        job.status;
-
+    document.getElementById("jobTitle").value = job.title;
+    document.getElementById("company").value = job.company;
+    document.getElementById("status").value = job.status;
     document.getElementById("applicationDate").value =
         job.applicationDate || "";
-
     document.getElementById("interviewDate").value =
         job.interviewDate || "";
-
     document.getElementById("jobLink").value =
         job.link || "";
-
     document.getElementById("notes").value =
         job.notes || "";
 
     openAdd();
-};
+}
 
+function deleteJob(id) {
 
-window.deleteJob = function(id) {
-
-    if (!confirm("Delete this application?"))
+    if (!confirm("Delete this application?")) {
         return;
+    }
 
     jobs =
-        jobs.filter(
-            j => j.id !== id
-        );
+        jobs.filter(j => j.id !== id);
 
-    saveJobs();
+    localStorage.setItem(
+        "jobmateJobs",
+        JSON.stringify(jobs)
+    );
 
     render();
     updateStats();
-};
+}
 
+function toggleFavorite(id) {
 
-window.toggleFavorite = function(id) {
+    jobs = jobs.map(job => {
 
-    jobs =
-        jobs.map(job => {
+        if (job.id === id) {
+            return {
+                ...job,
+                favorite: !job.favorite
+            };
+        }
 
-            if (job.id === id) {
+        return job;
+    });
 
-                job.favorite =
-                    !job.favorite;
-            }
-
-            return job;
-        });
-
-    saveJobs();
+    localStorage.setItem(
+        "jobmateJobs",
+        JSON.stringify(jobs)
+    );
 
     render();
     updateStats();
-};
+}
 
 
-/* =========================
-   RENDER
-========================= */
+/* RENDER */
 
-window.render = function() {
+function render() {
 
     const container =
-        document.getElementById(
-            "applications"
-        );
+        document.getElementById("applications");
 
     const search =
-        document.getElementById(
-            "search"
-        ).value.toLowerCase();
+        document.getElementById("search").value
+        .toLowerCase()
+        .trim();
 
     const filter =
-        document.getElementById(
-            "filter"
-        ).value;
+        document.getElementById("filter").value;
 
     const filtered =
         jobs.filter(job => {
 
             const searchMatch =
-                job.title
-                    .toLowerCase()
-                    .includes(search)
-                ||
-                job.company
-                    .toLowerCase()
-                    .includes(search);
+                job.title.toLowerCase().includes(search) ||
+                job.company.toLowerCase().includes(search);
 
             const statusMatch =
-                filter === "All"
-                ||
+                filter === "All" ||
                 job.status === filter;
 
             const favoriteMatch =
-                !favoritesOnly
-                ||
+                !favoritesOnly ||
                 job.favorite;
 
             return (
@@ -1528,22 +1023,18 @@ window.render = function() {
     if (!filtered.length) {
 
         container.innerHTML = `
-
             <div class="empty">
-
-                <div class="empty-icon">
-                    📂
-                </div>
-
+                <div class="empty-icon">📂</div>
                 <strong>
-                    No applications yet
+                    ${favoritesOnly
+                        ? "No favorite jobs yet"
+                        : "No applications yet"}
                 </strong>
-
                 <p>
-                    Add a job to start tracking
-                    your job search.
+                    ${favoritesOnly
+                        ? "Tap ☆ on a job to add it to favorites."
+                        : "Add a job to start tracking your job search."}
                 </p>
-
             </div>
         `;
 
@@ -1558,7 +1049,6 @@ window.render = function() {
                 <div class="application-top">
 
                     <div>
-
                         <h3>
                             ${safe(job.title)}
                         </h3>
@@ -1566,7 +1056,6 @@ window.render = function() {
                         <div class="company">
                             ${safe(job.company)}
                         </div>
-
                     </div>
 
                     <span class="status status-${safe(job.status)}">
@@ -1578,7 +1067,7 @@ window.render = function() {
                 <div class="details">
 
                     📅 Applied:
-                    ${job.applicationDate || "Not specified"}
+                    ${safe(job.applicationDate || "Not specified")}
 
                     ${
                         job.interviewDate
@@ -1624,14 +1113,11 @@ window.render = function() {
                     ${
                         job.link
                         ? `<a
+                            class="small-btn open-job"
                             href="${safeAttr(job.link)}"
                             target="_blank"
                             rel="noopener noreferrer">
-
-                            <button class="small-btn">
-                                🔗 Open Job
-                            </button>
-
+                            🔗 Open Job
                            </a>`
                         : ""
                     }
@@ -1641,55 +1127,39 @@ window.render = function() {
             </div>
 
         `).join("");
-};
-
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats() {
-
-    document.getElementById("total")
-        .textContent = jobs.length;
-
-    document.getElementById("interviews")
-        .textContent =
-        jobs.filter(
-            j => j.status === "Interview"
-        ).length;
-
-    document.getElementById("offers")
-        .textContent =
-        jobs.filter(
-            j => j.status === "Offer"
-        ).length;
-
-    document.getElementById("favorites")
-        .textContent =
-        jobs.filter(
-            j => j.favorite
-        ).length;
 }
 
 
-/* =========================
-   PROFILE
-========================= */
+/* STATS */
 
-window.saveProfile = function() {
+function updateStats() {
+
+    document.getElementById("total").textContent =
+        jobs.length;
+
+    document.getElementById("interviews").textContent =
+        jobs.filter(j => j.status === "Interview").length;
+
+    document.getElementById("offers").textContent =
+        jobs.filter(j => j.status === "Offer").length;
+
+    document.getElementById("favorites").textContent =
+        jobs.filter(j => j.favorite).length;
+}
+
+
+/* PROFILE */
+
+function saveProfile() {
 
     const name =
-        document.getElementById("nameInput")
-            .value.trim();
+        document.getElementById("nameInput").value.trim();
 
     const email =
-        document.getElementById("emailInput")
-            .value.trim();
+        document.getElementById("emailInput").value.trim();
 
     const bio =
-        document.getElementById("bioInput")
-            .value.trim();
+        document.getElementById("bioInput").value.trim();
 
     if (!name) {
 
@@ -1699,20 +1169,20 @@ window.saveProfile = function() {
     }
 
     profile = {
-        name,
-        email,
-        bio
+        name: name,
+        email: email,
+        bio: bio
     };
 
-    saveProfileData();
+    localStorage.setItem(
+        "jobmateProfile",
+        JSON.stringify(profile)
+    );
 
     loadProfile();
 
-    alert(
-        "Profile saved successfully! 🎉"
-    );
-};
-
+    alert("Profile saved successfully! 🎉");
+}
 
 function loadProfile() {
 
@@ -1720,9 +1190,7 @@ function loadProfile() {
         profile.name || "Your Name";
 
     const email =
-        profile.email ||
-        auth.currentUser?.email ||
-        "your@email.com";
+        profile.email || "your@email.com";
 
     const bio =
         profile.bio ||
@@ -1742,18 +1210,15 @@ function loadProfile() {
 
     document.getElementById(
         "nameInput"
-    ).value =
-        profile.name || "";
+    ).value = profile.name || "";
 
     document.getElementById(
         "emailInput"
-    ).value =
-        email;
+    ).value = profile.email || "";
 
     document.getElementById(
         "bioInput"
-    ).value =
-        profile.bio || "";
+    ).value = profile.bio || "";
 
     const initial =
         name.charAt(0).toUpperCase();
@@ -1777,9 +1242,7 @@ function loadProfile() {
 }
 
 
-/* =========================
-   SECURITY
-========================= */
+/* SECURITY */
 
 function safe(value) {
 
@@ -1791,16 +1254,24 @@ function safe(value) {
         .replace(/'/g,"&#039;");
 }
 
-
 function safeAttr(value) {
 
     return String(value)
+        .replace(/&/g,"&amp;")
         .replace(/"/g,"&quot;")
         .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;");
+        .replace(/>/g,"&gt;")
+        .replace(/'/g,"&#039;");
 }
+
+
+/* START */
+
+loadProfile();
+render();
+updateStats();
 
 </script>
 
 </body>
-    </html>
+            </html>
