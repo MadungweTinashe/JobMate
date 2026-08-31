@@ -1272,6 +1272,23 @@ render();
 updateStats();
 
 </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyC4ZK-zKWvGojS9aQaP9GTtml89dhfS_e4",
+    authDomain: "jobmate-903e4.firebaseapp.com",
+    projectId: "jobmate-903e4",
+    storageBucket: "jobmate-903e4.firebasestorage.app",
+    messagingSenderId: "190306290177",
+    appId: "1:190306290177:web:8c2ce73d3c108758c58e00"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  console.log("JobMate Firebase connected! ☁️");
+</script>
 </body>
             </html>
