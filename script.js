@@ -1,4 +1,13 @@
 function showForm() {
+    
+    
+   const firebaseConfig = {
+  // your Firebase config goes here
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+    function showForm() {
     const form = document.getElementById("applicationForm");
 
     if (form) {
@@ -30,3 +39,4 @@ async function saveApplication(event) {
         alert("Could not save application. Please try again.");
     }
 }
+)
