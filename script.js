@@ -6,8 +6,27 @@ function showForm() {
     }
 }
 
-function saveApplication(event) {
+async function saveApplication(event) {
     event.preventDefault();
 
-    alert("Application saved! 🎉");
+    const jobTitle = document.getElementById("jobTitle").value;
+    const company = document.getElementById("company").value;
+    const status = document.getElementById("status").value;
+
+    try {
+        await db.collection("applications").add({
+            jobTitle: jobTitle,
+            company: company,
+            status: status,
+            createdAt: new Date()
+        });
+
+        alert("Application saved! 🎉");
+
+        document.getElementById("applicationForm").reset();
+
+    } catch (error) {
+        console.error("Error saving application:", error);
+        alert("Could not save application. Please try again.");
+    }
 }
