@@ -1,13 +1,4 @@
 function showForm() {
-    
-    
-   const firebaseConfig = {
-  // your Firebase config goes here
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-    function showForm() {
     const form = document.getElementById("applicationForm");
 
     if (form) {
@@ -23,20 +14,21 @@ async function saveApplication(event) {
     const status = document.getElementById("status").value;
 
     try {
-        await db.collection("applications").add({
-            jobTitle: jobTitle,
-            company: company,
-            status: status,
-            createdAt: new Date()
-        });
+        const saved = await window.saveApplicationToFirebase(
+            jobTitle,
+            company,
+            status
+        );
 
-        alert("Application saved! 🎉");
-
-        document.getElementById("applicationForm").reset();
+        if (saved) {
+            alert("Application saved! 🎉");
+            document.getElementById("applicationForm").reset();
+        } else {
+            alert("Could not save application. Please try again.");
+        }
 
     } catch (error) {
         console.error("Error saving application:", error);
         alert("Could not save application. Please try again.");
     }
 }
-)
