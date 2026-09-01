@@ -1274,7 +1274,7 @@ updateStats();
 </script>
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyC4ZK-zKWvGojS9aQaP9GTtml89dhfS_e4",
@@ -1287,7 +1287,23 @@ updateStats();
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+window.saveApplicationToFirebase = async function(jobTitle, company, status) {
+    try {
+        await addDoc(collection(db, "applications"), {
+            jobTitle: jobTitle,
+            company: company,
+            status: status,
+            createdAt: new Date().toISOString()
+        });
 
+        console.log("Application saved to Firebase! 🎉");
+        return true;
+
+    } catch (error) {
+        console.error("Firebase save error:", error);
+        return false;
+    }
+};
   console.log("JobMate Firebase connected! ☁️");
 </script>
     <script src="script.js"></script>
